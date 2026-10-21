@@ -1,0 +1,8 @@
+# Plantilla para la configuración de firma de producción (Google Play)
+# Renombra o copia este archivo como 'key.properties' dentro de la carpeta 'android/'
+# IMPORTANTE: Nunca subas tu archivo 'key.properties' ni tu archivo '.jks' al repositorio Git.
+
+storePassword=TU_PASSWORD_DEL_KEYSTORE
+keyPassword=TU_PASSWORD_DE_LA_LLAVE
+keyAlias=upload
+storeFile=c:\\Users\\Sebas\\upload-keystore.jks

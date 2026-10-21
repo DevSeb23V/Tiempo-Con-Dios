@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Nombre y etiquetas base de la aplicación -->
+    <string name="app_name">Tiempo con Dios</string>
+    <string name="app_tagline">Un espacio digital para desconectarte de todo y encontrarte con Dios en lo secreto.</string>
+
+    <!-- Canales de notificación (Android 8.0+) -->
+    <string name="channel_devocional_name">Tiempo con Dios</string>
+    <string name="channel_devocional_description">Alarma de la cita diaria con Dios</string>
+    <string name="channel_animo_name">Recordatorios y ánimo</string>
+    <string name="channel_animo_description">Mensajes cálidos de aliento y avisos de preparación</string>
+
+    <!-- Acciones en notificación -->
+    <string name="notif_action_empezar">Empezar</string>
+
+    <!-- Notificaciones devocionales -->
+    <string name="notif_devocional_title">Es momento de tu tiempo con Dios</string>
+    <string name="notif_devocional_body">Tu Padre te espera en lo secreto. Tu Biblia y cuaderno están listos.</string>
+    <string name="notif_aviso_previo_title">Prepara tu espacio</string>
+    <string name="notif_aviso_previo_body">Deja lista tu Biblia, cuaderno y pluma para tu tiempo con Dios.</string>
+
+    <!-- Mensajes de reenganche (sin culpa) -->
+    <string name="reenganche_1">Dios sigue esperándote con los brazos abiertos. Cuando quieras, aquí estamos.</string>
+    <string name="reenganche_2">Hoy es un buen día para volver a encontrarte con Él en lo secreto.</string>
+    <string name="reenganche_3">No importa cuánto tiempo pasó. Su gracia sigue intacta.</string>
+    <string name="reenganche_4">Unos minutos en Su presencia pueden transformar todo tu día.</string>
+    <string name="reenganche_5">Tu lugar secreto sigue reservado para ti. Cero prisas, solo paz.</string>
+
+    <!-- Textos de Onboarding -->
+    <string name="onboarding_title">Tiempo con Dios</string>
+    <string name="onboarding_subtitle">Un espacio digital para desconectarte de todo y encontrarte con Dios en lo secreto.</string>
+    <string name="onboarding_pilar1_title">Con tu Biblia y cuaderno físico</string>
+    <string name="onboarding_pilar1_desc">Esta app está pensada para ser cerrada. El celular reposa a un lado mientras tu corazón se enfoca en lo importante.</string>
+    <string name="onboarding_pilar2_title">Cero culpa, sin rachas rotas</string>
+    <string name="onboarding_pilar2_desc">Tu progreso no se destruye si fallas un día. Dios valora tu constancia, no el perfeccionismo.</string>
+    <string name="onboarding_pilar3_title">Privacidad y sincronización en la nube</string>
+    <string name="onboarding_pilar3_desc">Inicia sesión con tu cuenta para mantener tu progreso a salvo en cualquier dispositivo. Tu intimidad con Dios se guarda con total seguridad.</string>
+</resources>
