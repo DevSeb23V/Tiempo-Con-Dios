@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_typography.dart';
 import '../../../../core/database/devocional_repository.dart';
+import 'package:go_router/go_router.dart';
 import 'black_screen_dialog.dart';
 
 /// Tarjeta blanca central con el botón reactivo de inicio / fin devocional.
@@ -53,16 +54,70 @@ class DevocionalActionCard extends ConsumerWidget {
               const SizedBox(height: 12),
               AnimatedSwitcher(
                 duration: const Duration(milliseconds: 300),
-                child: Text(
-                  subtitulo,
-                  key: ValueKey(subtitulo),
-                  textAlign: TextAlign.center,
-                  style: AppTypography.subtitle(
-                    color: haySesionActiva ? AppColors.orangeDark : AppColors.textSecondary,
-                  ).copyWith(
-                    fontWeight: haySesionActiva ? FontWeight.w600 : FontWeight.w400,
-                  ),
-                ),
+                child: haySesionActiva
+                    ? Text(
+                        subtitulo,
+                        key: ValueKey(subtitulo),
+                        textAlign: TextAlign.center,
+                        style: AppTypography.subtitle(
+                          color: AppColors.orangeDark,
+                        ).copyWith(
+                          fontWeight: FontWeight.w600,
+                        ),
+                      )
+                    : Row(
+                        key: ValueKey(subtitulo),
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Flexible(
+                            child: Text(
+                              subtitulo,
+                              textAlign: TextAlign.center,
+                              style: AppTypography.subtitle(
+                                color: AppColors.textSecondary,
+                              ).copyWith(
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 10),
+                          InkWell(
+                            onTap: () => context.push('/ajustes'),
+                            borderRadius: BorderRadius.circular(12),
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                              decoration: BoxDecoration(
+                                color: AppColors.steelBlue.withValues(alpha: 0.08),
+                                borderRadius: BorderRadius.circular(12),
+                                border: Border.all(
+                                  color: AppColors.steelBlue.withValues(alpha: 0.2),
+                                  width: 1,
+                                ),
+                              ),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Icon(
+                                    Icons.access_time_rounded,
+                                    size: 16,
+                                    color: AppColors.steelBlue,
+                                  ),
+                                  const SizedBox(height: 2),
+                                  Text(
+                                    'Programar horario',
+                                    style: AppTypography.caption(color: AppColors.steelBlue).copyWith(
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.w600,
+                                      height: 1.1,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
               ),
               const SizedBox(height: 24),
 

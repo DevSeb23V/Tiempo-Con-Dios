@@ -37,10 +37,10 @@ void main() {
 
     // Verificamos elementos clave de bienvenida
     expect(find.text('Tiempo con Dios'), findsOneWidget);
-    expect(find.text('Un puente digital para desconectarte del ruido y encontrarte con tu Padre en lo secreto.'), findsOneWidget);
+    expect(find.text('Un espacio digital para desconectarte de todo y encontrarte con Dios en lo secreto.'), findsOneWidget);
     expect(find.text('Con tu Biblia y cuaderno físico'), findsOneWidget);
-    expect(find.text('La Regla de la Gracia'), findsOneWidget);
-    expect(find.text('100% en tu teléfono y sin cuentas'), findsOneWidget);
+    expect(find.text('Cero culpa, sin rachas rotas'), findsOneWidget);
+    expect(find.text('Privacidad y sincronización en la nube'), findsOneWidget);
 
     // Tocamos "Comenzar →" para avanzar al paso 1
     await tester.tap(find.text('Comenzar →'));

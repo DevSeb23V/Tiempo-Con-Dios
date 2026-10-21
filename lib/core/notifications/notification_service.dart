@@ -44,7 +44,11 @@ class NotificationService {
         await _notifications.initialize(
           initSettings,
           onDidReceiveNotificationResponse: (response) {
-            onSelectNotification?.call(response.payload);
+            if (response.actionId == 'empezar_devocional') {
+              onSelectNotification?.call('empezar_devocional');
+            } else {
+              onSelectNotification?.call(response.payload);
+            }
           },
         );
         initialized = true;
@@ -171,6 +175,14 @@ class NotificationService {
       sound: usarSonidoCalmado ? const RawResourceAndroidNotificationSound('bell_calm') : null,
       enableVibration: true,
       icon: '@mipmap/launcher_icon',
+      actions: const <AndroidNotificationAction>[
+        AndroidNotificationAction(
+          'empezar_devocional',
+          'Empezar',
+          showsUserInterface: true,
+          cancelNotification: true,
+        ),
+      ],
     );
   }
 

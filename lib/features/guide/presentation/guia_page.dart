@@ -63,32 +63,46 @@ class _GuiaPageState extends ConsumerState<GuiaPage> {
                           alignment: Alignment.center,
                           child: const CircularProgressIndicator(color: AppColors.steelBlue),
                         )
-                      else
-                        SizedBox(
-                          height: 215,
-                          child: Center(
-                            child: ReorderableListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              shrinkWrap: true,
-                              physics: const BouncingScrollPhysics(),
-                              buildDefaultDragHandles: false,
-                              itemCount: items.length,
-                              onReorderItem: _onReorderItem,
-                              itemBuilder: (context, index) {
-                                final actividad = items[index];
-                                return ReorderableDragStartListener(
-                                  key: ValueKey('activity_${actividad.id}'),
-                                  index: index,
-                                  child: CloudStepCard(
-                                    index: index,
-                                    actividad: actividad,
-                                    onDelete: items.length > 1
-                                        ? () => _eliminarActividad(actividad)
-                                        : null,
-                                  ),
-                                );
-                              },
+                      else if (items.length <= 3)
+                        Center(
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                for (int i = 0; i < items.length; i++)
+                                  _buildDraggableCard(items[i], i, items.length),
+                              ],
                             ),
+                          ),
+                        )
+                      else
+                        Center(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              // Primeros 3 elementos organizados horizontalmente
+                              FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    for (int i = 0; i < 3; i++)
+                                      _buildDraggableCard(items[i], i, items.length),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 16),
+                              // A partir del 4.º elemento en adelante, organizados hacia abajo y centrados verticalmente
+                              Wrap(
+                                alignment: WrapAlignment.center,
+                                runSpacing: 16,
+                                children: [
+                                  for (int i = 3; i < items.length; i++)
+                                    _buildDraggableCard(items[i], i, items.length),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
                       const SizedBox(height: 24),
@@ -186,9 +200,63 @@ class _GuiaPageState extends ConsumerState<GuiaPage> {
     );
   }
 
+  Widget _buildDraggableCard(ActividadGuiaData actividad, int index, int totalCount) {
+    return DragTarget<int>(
+      onWillAcceptWithDetails: (details) => details.data != index,
+      onAcceptWithDetails: (details) {
+        _onReorderItem(details.data, index);
+      },
+      builder: (context, candidateData, rejectedData) {
+        final isHovered = candidateData.isNotEmpty;
+        return LongPressDraggable<int>(
+          data: index,
+          feedback: Material(
+            color: Colors.transparent,
+            child: Transform.scale(
+              scale: 1.05,
+              child: Opacity(
+                opacity: 0.9,
+                child: CloudStepCard(
+                  index: index,
+                  actividad: actividad,
+                  onDelete: null,
+                ),
+              ),
+            ),
+          ),
+          childWhenDragging: Opacity(
+            opacity: 0.3,
+            child: CloudStepCard(
+              index: index,
+              actividad: actividad,
+              onDelete: null,
+            ),
+          ),
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(34),
+              border: isHovered
+                  ? Border.all(color: AppColors.gold, width: 2)
+                  : null,
+            ),
+            child: CloudStepCard(
+              index: index,
+              actividad: actividad,
+              onDelete: totalCount > 1 ? () => _eliminarActividad(actividad) : null,
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   void _onReorderItem(int oldIndex, int newIndex) {
+    if (oldIndex == newIndex) return;
     setState(() {
-      final items = List<ActividadGuiaData>.from(_orderedActivities!);
+      final currentList = _orderedActivities ?? ref.read(actividadesStreamProvider).valueOrNull ?? <ActividadGuiaData>[];
+      final items = List<ActividadGuiaData>.from(currentList);
+      if (oldIndex < 0 || oldIndex >= items.length || newIndex < 0 || newIndex >= items.length) return;
       final item = items.removeAt(oldIndex);
       items.insert(newIndex, item);
       _orderedActivities = items;

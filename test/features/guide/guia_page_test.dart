@@ -71,4 +71,34 @@ void main() {
     expect(find.text('Cancelar'), findsOneWidget);
     expect(find.text('Agregar'), findsOneWidget);
   });
+
+  testWidgets('GuiaPage organiza 4 o más actividades hacia abajo sin desbordamiento horizontal', (tester) async {
+    const cuatroActividades = [
+      ActividadGuiaData(id: 1, titulo: 'Orar', orden: 1, activa: true),
+      ActividadGuiaData(id: 2, titulo: 'Leer la Biblia', orden: 2, activa: true),
+      ActividadGuiaData(id: 3, titulo: 'Escribir', orden: 3, activa: true),
+      ActividadGuiaData(id: 4, titulo: 'Cantar alabanza', orden: 4, activa: true),
+    ];
+
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          actividadesStreamProvider.overrideWith((ref) => Stream.value(cuatroActividades)),
+        ],
+        child: const MaterialApp(
+          home: GuiaPage(),
+        ),
+      ),
+    );
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 100));
+
+    // Verificamos que las 4 tarjetas de nube están presentes
+    expect(find.byType(CloudStepCard), findsNWidgets(4));
+    expect(find.text('01'), findsOneWidget);
+    expect(find.text('02'), findsOneWidget);
+    expect(find.text('03'), findsOneWidget);
+    expect(find.text('04'), findsOneWidget);
+    expect(find.text('Cantar alabanza'), findsOneWidget);
+  });
 }

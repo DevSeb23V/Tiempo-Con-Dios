@@ -115,6 +115,66 @@ class _ProgressPageState extends ConsumerState<ProgressPage> {
               ),
               const SizedBox(height: 20),
 
+              // Sección Registro de sesiones con botón claro y nota
+              Text(
+                'Registro de sesiones',
+                style: AppTypography.bodyMediumBold(),
+              ),
+              const SizedBox(height: 8),
+              InkWell(
+                onTap: () {
+                  final hoyYmd = AppDateUtils.toYmd(DateTime.now());
+                  final sesionHoy = mapaSesiones[hoyYmd];
+                  ManualEntrySheet.show(
+                    context,
+                    date: DateTime.now(),
+                    existingSession: sesionHoy,
+                  );
+                },
+                borderRadius: BorderRadius.circular(16),
+                child: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  decoration: BoxDecoration(
+                    color: AppColors.steelBlue.withValues(alpha: 0.08),
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(
+                      color: AppColors.steelBlue.withValues(alpha: 0.3),
+                      width: 1.2,
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(
+                        Icons.edit_calendar_rounded,
+                        color: AppColors.steelBlue,
+                        size: 20,
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        'Actualizar tiempo',
+                        style: AppTypography.buttonText(color: AppColors.steelBlue).copyWith(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(height: 6),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: Text(
+                  "En caso de no haber presionado 'Hecho', puedes actualizar tu tiempo aquí.",
+                  style: AppTypography.caption(
+                    color: AppColors.textSecondary,
+                  ).copyWith(fontSize: 12),
+                ),
+              ),
+              const SizedBox(height: 20),
+
               // Botón "Ver detalle del mes →"
               SizedBox(
                 width: double.infinity,

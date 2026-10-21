@@ -70,7 +70,7 @@ class DevocionalRepository {
         diasSemana: const Value([1, 2, 3, 4, 5, 6, 7]),
         horaDevocional: const Value('07:00'),
         avisoPrevioActivo: const Value(false),
-        onboardingCompletado: const Value(true),
+        onboardingCompletado: const Value(false),
       ),
     );
     return await (_db.select(_db.configuracionUsuarioTable)..limit(1)).getSingle();

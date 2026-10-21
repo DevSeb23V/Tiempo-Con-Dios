@@ -6,6 +6,7 @@ import 'core/database/app_database.dart';
 import 'core/database/devocional_repository.dart';
 import 'core/notifications/notification_service.dart';
 import 'core/theme/app_theme.dart';
+import 'features/home/presentation/widgets/black_screen_dialog.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,8 +38,18 @@ void _inicializarServiciosEnSegundoPlano(ProviderContainer container) async {
     final notifService = container.read(notificationServiceProvider);
 
     await notifService.inicializar(
-      onSelectNotification: (payload) {
-        if (payload == 'alerta_devocional') {
+      onSelectNotification: (payload) async {
+        if (payload == 'empezar_devocional') {
+          final repo = container.read(devocionalRepositoryProvider);
+          await repo.guardarInicioSesion();
+          final notif = container.read(notificationServiceProvider);
+          await notif.cancelarPosposicion();
+          appRouter.go('/');
+          final ctx = appRouter.routerDelegate.navigatorKey.currentContext;
+          if (ctx != null && ctx.mounted) {
+            BlackScreenDialog.show(ctx);
+          }
+        } else if (payload == 'alerta_devocional') {
           appRouter.go('/alerta');
         }
       },

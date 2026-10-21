@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/constants/app_colors.dart';
 import '../../../../core/constants/app_typography.dart';
 
-/// Pantalla 100% negra (#000000) AMOLED que se muestra durante 3 segundos al iniciar el devocional.
+/// Pantalla 100% negra (#000000) AMOLED que se muestra durante 15 segundos al iniciar el devocional.
 /// Respeta la imposibilidad del SO de apagar la pantalla por código y guía al usuario con calma.
 class BlackScreenDialog extends StatefulWidget {
   const BlackScreenDialog({super.key});
@@ -37,8 +37,8 @@ class _BlackScreenDialogState extends State<BlackScreenDialog> with SingleTicker
       duration: const Duration(milliseconds: 800),
     )..forward();
 
-    // Cierra automáticamente el diálogo tras exactamente 3 segundos
-    _dismissTimer = Timer(const Duration(seconds: 3), () {
+    // Cierra automáticamente el diálogo tras exactamente 15 segundos
+    _dismissTimer = Timer(const Duration(seconds: 15), () {
       if (mounted) {
         Navigator.of(context, rootNavigator: true).pop();
       }
@@ -58,7 +58,7 @@ class _BlackScreenDialogState extends State<BlackScreenDialog> with SingleTicker
       canPop: true,
       child: GestureDetector(
         onTap: () {
-          // Permite cerrar si el usuario toca la pantalla antes de los 3s
+          // Permite cerrar si el usuario toca la pantalla antes de los 15s
           Navigator.of(context, rootNavigator: true).pop();
         },
         child: Scaffold(

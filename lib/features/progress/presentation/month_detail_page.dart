@@ -123,7 +123,62 @@ class MonthDetailPage extends ConsumerWidget {
                   'Registro de sesiones',
                   style: AppTypography.bodyMediumBold(),
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 8),
+
+                // Botón claro de "Actualizar tiempo"
+                InkWell(
+                  onTap: () {
+                    final hoyYmd = AppDateUtils.toYmd(DateTime.now());
+                    final sesionHoy = sesiones.where((s) => s.fecha == hoyYmd).firstOrNull;
+                    ManualEntrySheet.show(
+                      context,
+                      date: DateTime.now(),
+                      existingSession: sesionHoy,
+                    );
+                  },
+                  borderRadius: BorderRadius.circular(16),
+                  child: Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                    decoration: BoxDecoration(
+                      color: AppColors.steelBlue.withValues(alpha: 0.08),
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(
+                        color: AppColors.steelBlue.withValues(alpha: 0.3),
+                        width: 1.2,
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          Icons.edit_calendar_rounded,
+                          color: AppColors.steelBlue,
+                          size: 20,
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          'Actualizar tiempo',
+                          style: AppTypography.buttonText(color: AppColors.steelBlue).copyWith(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 6),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 4),
+                  child: Text(
+                    "En caso de no haber presionado 'Hecho', puedes actualizar tu tiempo aquí.",
+                    style: AppTypography.caption(
+                      color: AppColors.textSecondary,
+                    ).copyWith(fontSize: 12),
+                  ),
+                ),
+                const SizedBox(height: 16),
 
                 if (sesiones.isEmpty)
                   Container(

@@ -266,7 +266,7 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
           ),
           const SizedBox(height: 10),
           Text(
-            'Un puente digital para desconectarte del ruido y encontrarte con tu Padre en lo secreto.',
+            'Un espacio digital para desconectarte de todo y encontrarte con Dios en lo secreto.',
             textAlign: TextAlign.center,
             style: AppTypography.body(
               color: AppColors.textSecondary,
@@ -279,19 +279,19 @@ class _OnboardingPageState extends ConsumerState<OnboardingPage> {
           _buildPilarCard(
             Icons.auto_stories_outlined,
             'Con tu Biblia y cuaderno físico',
-            'Diseñada para ser cerrada. El celular reposa mientras oras.',
+            'Esta app está pensada para ser cerrada. El celular reposa a un lado mientras tu corazón se enfoca en lo importante.',
           ),
           const SizedBox(height: 10),
           _buildPilarCard(
             Icons.favorite_border_rounded,
-            'La Regla de la Gracia',
-            'Cero culpa ni rachas rotas. Tu constancia nunca se destruye.',
+            'Cero culpa, sin rachas rotas',
+            'Tu progreso no se destruye si fallas un día. Dios valora tu constancia, no el perfeccionismo.',
           ),
           const SizedBox(height: 10),
           _buildPilarCard(
-            Icons.lock_outline_rounded,
-            '100% en tu teléfono y sin cuentas',
-            'Privacidad total y offline. Tu intimidad espiritual es sagrada.',
+            Icons.cloud_sync_outlined,
+            'Privacidad y sincronización en la nube',
+            'Inicia sesión con tu cuenta para mantener tu progreso a salvo en cualquier dispositivo. Tu intimidad con Dios se guarda con total seguridad.',
           ),
 
           const SizedBox(height: 32),

@@ -67,6 +67,10 @@ class _ManualEntrySheetState extends ConsumerState<ManualEntrySheet> {
         widget.date,
         duracionMinutos: _selectedMinutes,
       );
+      final now = DateTime.now();
+      if (widget.date.year == now.year && widget.date.month == now.month && widget.date.day == now.day) {
+        await repo.cancelarSesion();
+      }
       if (mounted) {
         Navigator.of(context).pop();
         ScaffoldMessenger.of(context).showSnackBar(

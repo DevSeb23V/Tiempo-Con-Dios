@@ -67,6 +67,11 @@ void main() {
     expect(find.byType(EvolutionChart), findsOneWidget);
     expect(find.text('Tu evolución'), findsOneWidget);
 
+    // Verificamos sección y botón de Actualizar tiempo
+    expect(find.text('Registro de sesiones'), findsOneWidget);
+    expect(find.text('Actualizar tiempo'), findsOneWidget);
+    expect(find.text("En caso de no haber presionado 'Hecho', puedes actualizar tu tiempo aquí."), findsOneWidget);
+
     // Verificamos botón de detalle del mes
     expect(find.text('Ver detalle del mes'), findsOneWidget);
   });

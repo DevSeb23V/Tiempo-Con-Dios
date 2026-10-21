@@ -58,6 +58,8 @@ void main() {
       expect(find.text('Tiempo con Dios\nde hoy'), findsOneWidget);
       // Botón inicial
       expect(find.text('Empezar mi tiempo'), findsOneWidget);
+      // Botón programar horario
+      expect(find.text('Programar horario'), findsOneWidget);
       // Fila de días
       expect(find.text('Mis días de tiempo con Dios'), findsOneWidget);
       // Llama
@@ -94,7 +96,7 @@ void main() {
       await tester.pumpWidget(const SizedBox());
     });
 
-    testWidgets('BlackScreenDialog muestra mensaje tenue y se descarta tras 3 segundos', (WidgetTester tester) async {
+    testWidgets('BlackScreenDialog muestra mensaje tenue y se descarta tras 15 segundos', (WidgetTester tester) async {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
@@ -110,8 +112,8 @@ void main() {
         findsOneWidget,
       );
 
-      // Avanzamos 3 segundos
-      await tester.pump(const Duration(seconds: 3));
+      // Avanzamos 15 segundos
+      await tester.pump(const Duration(seconds: 15));
       await tester.pump(const Duration(milliseconds: 100));
 
       await tester.pumpWidget(const SizedBox());
